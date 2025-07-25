@@ -6,6 +6,7 @@
 - TypeORM
 - PostgreSQL
 - Typescript
+- ts-jest
 
 ---
 
@@ -158,6 +159,7 @@ takaboure/
 │ ├── modules/
 │ │ ├── products/
 │ │ │ ├── dto/
+│ │ │ ├── test/
 │ │ │ ├── products.controller.ts
 │ │ │ ├── products.module.ts
 │ │ │ └── products.service.ts
@@ -167,6 +169,7 @@ takaboure/
 │ │ │ ├── transactions.module.ts
 │ │ │ └── transactions.service.ts
 │ │ └── users/
+│ │ │ ├── test/
 │ │ ├── users.controller.ts
 │ │ ├── users.module.ts
 │ │ └── users.service.ts
@@ -203,20 +206,19 @@ Pastikan Anda telah menginstal:
 
 2. **Konfigurasi .env**
 
-```bash
-  Rubah file .env.example menjadi .env
-```
+   ```bash
+   Rubah file .env.example menjadi .env
+   ```
 
 3. **Konfigurasi dataase**
-
-- pastikan anda sudah membuat databse dan konfigurasi database .env
+   - pastikan anda sudah membuat databse dan konfigurasi database .env
 
 ```bash
-  DATABASE_HOST=localhost
-  DATABASE_PORT=5432
-  DATABASE_USER=postgres
-  DATABASE_PASSWORD=your_password
-  DATABASE_NAME=kabtour
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASSWORD=your_password
+DATABASE_NAME=kabtour
 ```
 
 ---
@@ -233,11 +235,12 @@ Pastikan Anda telah menginstal:
    npm run test product
    ```
 
-2. **Semua test**
+2. **Semua tes**
 
-```bash
-  npm run test
-```
+   ```bash
+   npm run test
+
+   ```
 
 ---
 
