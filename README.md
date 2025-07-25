@@ -261,9 +261,8 @@ Pastikan Anda telah menginstal:
 
 3. **Build untuk Production**
 
-   ````bash
+   ```bash
    npm run start:prod
-   ```  ```
-   ````
+   ```
 
 ---
