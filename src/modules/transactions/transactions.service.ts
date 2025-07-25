@@ -10,6 +10,7 @@ import { Users, UserType } from 'src/models/users/entities/user.entities';
 import { Products } from 'src/models/products/entities/product.entity';
 import { Transactions } from 'src/models/transactions/entities/Transaction.entities';
 import { CreateTransactionDto } from './dto/create.transaction.dto';
+import { UpdateTransactionStatusDto } from './dto/update-status.dto';
 
 @Injectable()
 export class TransactionsService {
@@ -86,15 +87,6 @@ export class TransactionsService {
       totalPrice,
     });
 
-    const result_response_trx = {
-      customer_name: customer.name,
-      owner: product.owner.name,
-      customer,
-      product,
-      quantity: data.quantity,
-      totalPrice,
-    };
-
     await this.transactionRepo.save(trx);
 
     // kurangin stock product berdasarkan product yg dipilih
@@ -104,7 +96,42 @@ export class TransactionsService {
       data.quantity,
     );
 
+    const result_response_trx = {
+      customer_name: customer.name,
+      owner: product.owner.name,
+      status: trx.status,
+      customer,
+      product,
+      quantity: data.quantity,
+      totalPrice,
+    };
+
     return result_response_trx;
+  }
+
+  // src/modules/transactions/transactions.service.ts
+  async updateStatus(id: number, dto: UpdateTransactionStatusDto) {
+    const trx = await this.transactionRepo.findOne({ where: { id } });
+
+    if (!trx) {
+      throw new HttpException(
+        {
+          status: false,
+          message: 'Transaksi tidak ditemukan',
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    trx.status = dto.status;
+
+    const updated = await this.transactionRepo.save(trx);
+
+    return {
+      status: true,
+      message: 'Status transaksi berhasil diperbarui',
+      data: updated,
+    };
   }
 
   findAll() {

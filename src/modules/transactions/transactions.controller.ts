@@ -7,10 +7,12 @@ import {
   Delete,
   ParseIntPipe,
   NotFoundException,
+  Put,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create.transaction.dto';
 import { Transactions } from 'src/models/transactions/entities/Transaction.entities';
+import { UpdateTransactionStatusDto } from './dto/update-status.dto';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -25,6 +27,19 @@ export class TransactionsController {
       status: true,
       message: 'Suksess',
       data: dataTransaksi,
+    };
+  }
+
+  @Put(':id/status')
+  async updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateTransactionStatusDto,
+  ) {
+    const updated = await this.transactionsService.updateStatus(id, dto);
+    return {
+      status: true,
+      message: 'Status transaksi diperbarui!',
+      data: updated,
     };
   }
 

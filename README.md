@@ -32,7 +32,7 @@ Aplikasi **Kabtour** adalah backend service untuk sistem manajemen transaksi ber
 
 - **Users** – merepresentasikan pengguna sistem, yang dapat menjadi customer atau owner.
 - **Products** – data produk yang dijual oleh user yang type nya owner.
-- **Transactions** – representasi transaksi pembelian produk, yang bisa melakukan transaksi hanya user yang type nya customer
+- **Transactions** – representasi transaksi pembelian produk, yang bisa melakukan transaksi hanya user yang type nya customer, lalu update status yang default nya PENDING bisa REJECTED atau ACCEPTED
 
 ---
 
@@ -73,6 +73,7 @@ Aplikasi **Kabtour** adalah backend service untuk sistem manajemen transaksi ber
 | id         | integer   | Primary key                        |
 | quantity   | integer   | Jumlah produk yang dibeli          |
 | totalPrice | number    | Total harga                        |
+| status     | string    | PENDING, REJECTED, ACCEPTE         |
 | createdAt  | timestamp | Tanggal dibuat                     |
 | updatedAt  | timestamp | Tanggal diubah                     |
 | customerId | integer   | Foreign key ke `users(id)` (buyer) |
@@ -123,7 +124,7 @@ Seeder hanya berjalan jika belum ada produk sebelumnya.
 - ✅ Manajemen User
 - ✅ Manajemen Produk
 - ✅ Transaksi
-- ✅ Validasi produk saat transaksi
+- ✅ Validasi produk saat transaksi dan update status transaksi
 - ✅ API telah terdokumentasi dengan baik via Postman
 
 ---

@@ -9,6 +9,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+export enum TransactionStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
+}
+
 @Entity()
 export class Transactions {
   @PrimaryGeneratedColumn()
@@ -29,6 +35,13 @@ export class Transactions {
 
   @Column()
   totalPrice: number;
+
+  @Column({
+    type: 'enum',
+    enum: TransactionStatus,
+    default: TransactionStatus.PENDING,
+  })
+  status: TransactionStatus;
 
   @CreateDateColumn()
   createdAt: Date;
