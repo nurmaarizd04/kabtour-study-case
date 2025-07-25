@@ -213,13 +213,13 @@ Pastikan Anda telah menginstal:
 3. **Konfigurasi dataase**
    - pastikan anda sudah membuat databse dan konfigurasi database .env
 
-```bash
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_USER=postgres
-DATABASE_PASSWORD=your_password
-DATABASE_NAME=kabtour
-```
+   ```bash
+   DATABASE_HOST=localhost
+   DATABASE_PORT=5432
+   DATABASE_USER=postgres
+   DATABASE_PASSWORD=your_password
+   DATABASE_NAME=kabtour
+   ```
 
 ---
 
