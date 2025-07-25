@@ -32,7 +32,7 @@ Aplikasi **Kabtour** adalah backend service untuk sistem manajemen transaksi ber
 
 - **Users** – merepresentasikan pengguna sistem, yang dapat menjadi customer atau owner.
 - **Products** – data produk yang dijual oleh user yang type nya owner.
-- **Transactions** – representasi transaksi pembelian produk, yang bisa melakukan transaksi hanya user yang type nya customer, lalu update status yang default nya PENDING bisa REJECTED atau ACCEPTED
+- **Transactions** – representasi transaksi pembelian produk, yang bisa melakukan transaksi hanya user yang type nya customer, lalu update status yang default nya PENDING bisa REJECTED atau ACCEPTED, khusus update status untuk hanya bisa dilakukan owner yang mempunyai product tersebut
 
 ---
 

@@ -109,9 +109,15 @@ export class TransactionsService {
     return result_response_trx;
   }
 
-  // src/modules/transactions/transactions.service.ts
-  async updateStatus(id: number, dto: UpdateTransactionStatusDto) {
-    const trx = await this.transactionRepo.findOne({ where: { id } });
+  async updateStatus(
+    id: number,
+    dto: UpdateTransactionStatusDto,
+    userId: number,
+  ) {
+    const trx = await this.transactionRepo.findOne({
+      where: { id },
+      relations: ['product', 'product.owner'],
+    });
 
     if (!trx) {
       throw new HttpException(
@@ -123,8 +129,31 @@ export class TransactionsService {
       );
     }
 
-    trx.status = dto.status;
+    // Cek apakah user adalah OWNER dari produk
+    const productOwner = trx.product.owner;
 
+    if (productOwner.id !== userId) {
+      throw new HttpException(
+        {
+          status: false,
+          message: 'Hanya owner produk yang boleh mengubah status transaksi',
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
+
+    // Cek apakah user bertipe OWNER
+    if (productOwner.type_user !== UserType.OWNER) {
+      throw new HttpException(
+        {
+          status: false,
+          message: 'User tidak memiliki hak akses sebagai owner',
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
+
+    trx.status = dto.status;
     const updated = await this.transactionRepo.save(trx);
 
     return {

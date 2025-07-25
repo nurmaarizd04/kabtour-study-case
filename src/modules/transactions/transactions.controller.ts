@@ -8,6 +8,8 @@ import {
   ParseIntPipe,
   NotFoundException,
   Put,
+  UseGuards,
+  Query,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create.transaction.dto';
@@ -35,7 +37,12 @@ export class TransactionsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateTransactionStatusDto,
   ) {
-    const updated = await this.transactionsService.updateStatus(id, dto);
+    const updated = await this.transactionsService.updateStatus(
+      id,
+      dto,
+      dto.userId,
+    );
+
     return {
       status: true,
       message: 'Status transaksi diperbarui!',
